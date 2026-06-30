@@ -30,7 +30,7 @@ export default function Navbar() {
 
         {/* Logo - left side */}
         <Link href="/" style={{ textDecoration: "none", color: "var(--text)", fontSize: "20px", fontWeight: "bold" }}>
-          Tile<span style={{ color: "var(--gold)" }}>Verse</span>
+          Tiles<span style={{ color: "var(--gold)" }}>Gallery</span>
         </Link>
 
         {/* Links - center */}
