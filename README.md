@@ -1,4 +1,4 @@
-# TileVerse 
+# Tiles Gallery
 
 A simple tile gallery website. Built for a university assignment using **Next.js**, **Better Auth**, and **MongoDB**.
 
