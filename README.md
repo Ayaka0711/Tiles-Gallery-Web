@@ -1,102 +1,145 @@
-# Tiles Gallery
+# Tiles Gallery 
 
-A simple tile gallery website. Built for a university assignment using **Next.js**, **Better Auth**, and **MongoDB**.
+A simple tile gallery website I built for my university web development assignment. It shows a collection of tiles, lets users search them, and has login/register functionality.
 
-## What this project does
+## Live Website
 
-- Shows a home page with a banner and featured tiles
-- Lets users browse all tiles and search them
-- Lets users register and login (email/password or Google)
-- Shows tile details only to logged-in users
-- Lets users view and update their profile
+🔗 https://tiles-gallery-web-tau.vercel.app
 
-## Tech Used
+## What This Project Does
 
-- **Next.js** (App Router) - the main framework
-- **TypeScript** - for type safety
-- **Tailwind CSS** - for some base styles
-- **Better Auth** - handles login/signup/sessions
-- **MongoDB** - stores user accounts
-- **react-hot-toast** - shows popup messages
+- Shows a home page with a banner and some featured tiles
+- Lets users browse all tiles and search by name or category
+- Lets users register and login (with email/password or Google)
+- Shows full tile details only to logged-in users
+- Lets logged-in users see and update their profile
 
-## How to Run This Project
+## Tech I Used
 
-### 1. Install packages
+- **Next.js** (App Router) – the main framework for building the website
+- **TypeScript** – for catching errors while coding
+- **Tailwind CSS** – for some basic styling
+- **Better Auth** – handles login, register, and sessions
+- **MongoDB** – stores user accounts
+- **react-hot-toast** – for showing popup messages like "Login successful!"
+
+## npm Packages Used
+
+```
+better-auth   - authentication (login/signup with email & Google)
+mongodb       - connects to my MongoDB database
+react-hot-toast - shows toast/popup notifications
+```
+
+## How to Run This Project on Your Computer
+
+### 1. Clone this repo
+
+```bash
+git clone https://github.com/Ayaka0711/Tiles-Gallery-Web.git
+cd Tiles-Gallery-Web
+```
+
+### 2. Install the packages
+
 ```bash
 npm install
 ```
 
-### 2. Set up MongoDB
-1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and create a free account
+### 3. Set up MongoDB
+
+1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) and make a free account
 2. Create a free cluster
-3. Click "Connect" and copy your connection string
-4. It will look like: `mongodb+srv://username:password@cluster.mongodb.net/tileverse`
+3. Go to **Database Access** and create a database user (username + password)
+4. Go to **Network Access** and add `0.0.0.0/0` so it allows connections from anywhere
+5. Click **Connect** → **Drivers** → copy the connection string
 
-### 3. Set up Google Login (optional)
+### 4. Set up Google Login (optional)
+
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create OAuth credentials (Web application)
-3. Add this redirect URL: `http://localhost:3000/api/auth/callback/google`
-4. Copy your Client ID and Client Secret
+2. Create a new project
+3. Go to **APIs & Services → Credentials** and create an **OAuth Client ID**
+4. Add this redirect URL:
+   ```
+   http://localhost:3000/api/auth/callback/google
+   ```
+5. Copy your **Client ID** and **Client Secret**
 
-### 4. Create your .env.local file
-Copy `.env.local.example` to `.env.local` and fill in your real values:
+### 5. Create your `.env.local` file
 
-```
+Make a file called `.env.local` in the main folder and add this:
+
+```env
 MONGODB_URI=your-mongodb-connection-string
-BETTER_AUTH_SECRET=any-long-random-text
+BETTER_AUTH_SECRET=any-long-random-text-here
 BETTER_AUTH_URL=http://localhost:3000
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
 ```
 
-### 5. Run the app
+### 6. Run it
+
 ```bash
 npm run dev
 ```
 
-Open http://localhost:3000
+Then open http://localhost:3000 in your browser.
 
-## Pages
+## Pages in This App
 
-| Page | URL | Who can see it |
+| Page | URL | Who can visit |
 |------|-----|----------------|
 | Home | `/` | Everyone |
 | All Tiles | `/all-tiles` | Everyone |
 | Login | `/login` | Everyone |
 | Register | `/register` | Everyone |
-| Tile Details | `/tile/1` | Logged in users only |
-| My Profile | `/my-profile` | Logged in users only |
-| Update Profile | `/update-profile` | Logged in users only |
+| Tile Details | `/tile/1` | Only logged-in users |
+| My Profile | `/my-profile` | Only logged-in users |
+| Update Profile | `/update-profile` | Only logged-in users |
 
-## Project Structure
+## How My Folders Are Organized
 
 ```
 app/
-  page.tsx              -> Home page
-  layout.tsx            -> Wraps every page (navbar, footer)
-  globals.css           -> All styles
-  login/page.tsx        -> Login page
-  register/page.tsx     -> Register page
-  all-tiles/page.tsx    -> All tiles + search
-  tile/[id]/page.tsx    -> Single tile details (private)
-  my-profile/page.tsx   -> User profile (private)
-  update-profile/page.tsx -> Edit profile (private)
+  page.tsx               -> the home page
+  layout.tsx              -> wraps every page (navbar, footer, toast)
+  globals.css              -> all my styles
+  login/page.tsx           -> login page
+  register/page.tsx        -> register page
+  all-tiles/page.tsx       -> shows all tiles + search bar
+  tile/[id]/page.tsx       -> shows one tile's details (private page)
+  my-profile/page.tsx      -> shows my profile (private page)
+  update-profile/page.tsx  -> form to edit my profile (private page)
   api/
-    auth/[...all]/route.ts -> Better Auth API
-    tiles/route.ts          -> Returns tile data
+    auth/[...all]/route.ts -> handles all login/signup requests
+    tiles/route.ts          -> sends back the tile data
 
 components/
-  Navbar.tsx   -> Top navigation bar
-  Footer.tsx   -> Bottom footer
-  TileCard.tsx -> One tile card
+  Navbar.tsx    -> the top navigation bar
+  Footer.tsx    -> the bottom footer
+  TileCard.tsx  -> one tile card (used in the gallery)
 
 context/
-  AuthContext.tsx -> Shares login state with all pages
+  AuthContext.tsx  -> lets every page know if someone is logged in
 
 lib/
-  auth.ts        -> Better Auth server setup
-  auth-client.ts -> Better Auth client setup
+  auth.ts         -> sets up Better Auth on the server (connects to MongoDB)
+  auth-client.ts  -> sets up Better Auth on the browser (login/signup functions)
 
 data/
-  tiles.json -> Sample tile data (8 tiles)
+  tiles.json -> all the tile information (title, price, image, etc.)
 ```
+
+## What I Learned
+
+While building this, I learned how to:
+- Use Next.js App Router to make different pages and API routes
+- Connect a website to MongoDB using Better Auth
+- Make some pages private so only logged-in users can see them
+- Use environment variables to keep secret keys safe
+- Deploy a project to Vercel and connect it with Google login
+- Fix errors like MongoDB network access issues and OAuth redirect URLs
+
+## Notes
+
+This project was made for a university assignment. It's a beginner-level project, so the code is kept simple with lots of comments explaining what each part does.
